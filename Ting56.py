@@ -57,11 +57,20 @@ def getUrls(html):
                 code = getCharAtt(html)
                 #print code
                 m4aUrl= FonHen_JieMa(code);
-                print "downloading start"+m4aUrl
-                urllib.urlretrieve(m4aUrl, number+".m4a")
-                print "downloading end"+m4aUrl
+                title=getTitle(html);
+                print "downloading start"+title
+                urllib.urlretrieve(m4aUrl, title+".m4a")
+                print "downloading end"+title
+
 
     print count
+
+def getTitle(html):
+    #print html
+    m = re.search(u"<title>.*?</title>", html);
+    code = m.group(0).replace("<title>", "").replace("</title>", "")
+    print code
+    return code
 
 def getCharAtt(html):
     m = re.search(u"FonHen_JieMa\('([0-9,*]*)'\)", html);
